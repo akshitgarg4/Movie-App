@@ -1,4 +1,4 @@
-import {ADD_MOVIES} from '../actions';
+import {ADD_MOVIES,ADD_FAVOURITES} from '../actions';
 const initialMovieState={
     list:[],
     favourites:[]
@@ -6,13 +6,15 @@ const initialMovieState={
 export default function movies(state=initialMovieState,action)
 {
     //action will be js oblect that has movie to be added and type(compulsary)
-    if(action.type === ADD_MOVIES)
+    switch(action.type)
     {
-        return {
-            ...state,
-            list:action.movies
+        case ADD_MOVIES : return {
+            ...state,list:action.movies
         }
+        case ADD_FAVOURITES: return {
+            ...state,favourites:[action.movies , ...state.favourites]
+        }
+        default: return state;
     }
-    return state;
 
 }

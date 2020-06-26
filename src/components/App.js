@@ -11,19 +11,23 @@ class App extends React.Component{
 
 
 componentDidMount (){
-
- 
   this.props.store.subscribe(() => {
     console.log("Updated");
     this.forceUpdate();
   });
 
   this.props.store.dispatch(addMovies(data));
-  
-
-  
-
   console.log("hi",this.props.store.getState());
+}
+
+isMovieFavourite = (movie) =>{
+  const {favourites} = this.props.store.getState();
+  const index=favourites.indexOf(movie);
+  if(index !== -1)
+  {
+      return true;
+  }
+    return false;
 }
 
 
@@ -41,7 +45,7 @@ componentDidMount (){
         </div>
         <div className="list">
           {list.map((movie,index)=>(
-            <MovieCard movie={movie} key={`movies-${index}`} />
+            <MovieCard movie={movie} key={`movies-${index}`} dispatch={this.props.store.dispatch} isFavourite={this.isMovieFavourite(movie)} />
           ))}
         </div>
       </div>
