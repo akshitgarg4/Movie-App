@@ -1,10 +1,12 @@
 import {ADD_MOVIES,ADD_FAVOURITES,REM_FAV,SHOW_FAVOURITES} from '../actions';
+
+//movies reducer
 const initialMovieState={
     list:[],
     favourites:[],
     showFavourites:false
 }
-export default function movies(state=initialMovieState,action)
+export function movies(state=initialMovieState,action)
 {
     //action will be js oblect that has movie to be added and type(compulsary)
     switch(action.type)
@@ -26,4 +28,27 @@ export default function movies(state=initialMovieState,action)
         default: return state;
     }
 
+}
+//search reducer
+const initialSearchState={
+    results:{}
+}
+export function search(state=initialSearchState,action)
+{
+    return state;
+}
+
+
+
+//root/main reducer
+const initialRootState={
+    movies:initialMovieState,
+    search:initialSearchState
+};
+export default function rootReducer(state=initialRootState,action)
+{
+    return {
+        movies : movies (state.movies,action),
+        search : search (state.search,action)
+    }
 }
