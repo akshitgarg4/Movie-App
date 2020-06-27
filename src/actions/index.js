@@ -1,7 +1,10 @@
 //action types
 export const ADD_MOVIES='ADD_MOVIES';
 export const ADD_FAVOURITES='ADD_FAVOURITES';
+export const SHOW_FAVOURITES='SHOW_FAVOURITES';
+
 export const REM_FAV='REM_FAV';
+
 
 
 
@@ -35,3 +38,12 @@ export function remFav(movie)
       });
       
     }
+    export function showFavourites(val)
+    {
+        return (
+        {
+            type : SHOW_FAVOURITES,
+            val : val
+        });
+        
+      }
