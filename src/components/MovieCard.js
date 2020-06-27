@@ -1,5 +1,5 @@
 import React from 'react';
-import {addFavourites} from '../actions';
+import {addFavourites,remFav} from '../actions';
 
 
 
@@ -14,6 +14,8 @@ class MovieCard extends React.Component{
     }
     remFav = ()=>{
         console.log("BYEEEE");
+        const {movie} =this.props;
+        this.props.dispatch(remFav(movie));
     }
     render(){
         const {movie} =this.props;
