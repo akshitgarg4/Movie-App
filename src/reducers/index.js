@@ -1,4 +1,4 @@
-import {ADD_MOVIES,ADD_FAVOURITES,REM_FAV,SHOW_FAVOURITES} from '../actions';
+import {ADD_MOVIES,ADD_FAVOURITES,REM_FAV,SHOW_FAVOURITES,ADD_SEARCH_RESULT,ADD_MOVIES_TO_LIST} from '../actions';
 
 //movies reducer
 const initialMovieState={
@@ -25,17 +25,38 @@ export function movies(state=initialMovieState,action)
                 ...state,
                 showFavourites:action.val
             };
+        case ADD_MOVIES_TO_LIST:
+            return {
+                ...state,
+                list:[action.movie,...state.list]
+            }
         default: return state;
     }
 
 }
 //search reducer
 const initialSearchState={
-    results:{}
+    results:{},
+    showSearchResults:false
 }
 export function search(state=initialSearchState,action)
 {
-    return state;
+    switch(action.type)
+    {
+    
+        case ADD_MOVIES_TO_LIST:
+            return {
+                ...state,
+                showSearchResults:false
+            }
+        case ADD_SEARCH_RESULT:
+            return {
+                ...state,
+                showSearchResults:true,
+                result:action.movie
+            }
+        default: return state;
+    }
 }
 
 
